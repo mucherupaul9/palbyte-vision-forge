@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { CreditCard, TrendingUp, Users, DollarSign, CheckCircle, Linkedin } from 'lucide-react';
 import heroFintechImage from '@/assets/hero-fintech.jpg';
+import paulMucheruImage from '@/assets/paul-mucheru.jpg';
+import ecommlipaLogoImage from '@/assets/ecommlipa-logo.jpg';
 
 const Fintech = () => {
   const features = [
@@ -35,37 +37,43 @@ const Fintech = () => {
       name: "Paul Mucheru",
       role: "Managing Director",
       expertise: "Fintech expert with deep financial sector experience",
-      linkedin: "#"
+      linkedin: "#",
+      photo: paulMucheruImage
     },
     {
       name: "Alphonse Omesa",
       role: "Head of ICT",
       expertise: "Software engineer with extensive technical leadership",
-      linkedin: "#"
+      linkedin: "#",
+      photo: null
     },
     {
       name: "Kevin Owino",
       role: "Lead Developer",
       expertise: "Full-stack expert specializing in fintech solutions",
-      linkedin: "#"
+      linkedin: "#",
+      photo: null
     },
     {
       name: "Boniface Cherotwo",
       role: "Senior Developer",
       expertise: "Backend specialist with payment systems expertise",
-      linkedin: "#"
+      linkedin: "#",
+      photo: null
     },
     {
       name: "Emmanuel Ngetich",
       role: "Head of Operations & Marketing",
       expertise: "Partnership driver and business development expert",
-      linkedin: "#"
+      linkedin: "#",
+      photo: null
     },
     {
       name: "Samuel Ngila",
       role: "Head of Finance",
       expertise: "Financial modeling and compliance specialist",
-      linkedin: "#"
+      linkedin: "#",
+      photo: null
     }
   ];
 
@@ -82,7 +90,14 @@ const Fintech = () => {
       {/* What is Ecommlipa */}
       <section className="section-padding bg-background">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center space-y-6 slide-up">
+          <div className="max-w-4xl mx-auto text-center space-y-8 slide-up">
+            <div className="flex justify-center mb-6">
+              <img 
+                src={ecommlipaLogoImage} 
+                alt="Ecommlipa Logo" 
+                className="h-20 w-auto"
+              />
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold">What is Ecommlipa?</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Ecommlipa is our flagship fintech solution: an API-embedded Buy Now, Pay Later platform for e-commerce checkouts. 
@@ -159,8 +174,18 @@ const Fintech = () => {
             {teamMembers.map((member, index) => (
               <Card key={index} className="card-hover">
                 <CardHeader className="text-center">
-                  <div className="w-24 h-24 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <Users className="w-12 h-12 text-primary" />
+                  <div className="w-24 h-24 bg-primary/10 rounded-full mx-auto mb-4 overflow-hidden">
+                    {member.photo ? (
+                      <img 
+                        src={member.photo} 
+                        alt={`${member.name} - ${member.role}`}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Users className="w-12 h-12 text-primary" />
+                      </div>
+                    )}
                   </div>
                   <CardTitle className="text-xl">{member.name}</CardTitle>
                   <p className="text-primary font-medium">{member.role}</p>
