@@ -1,0 +1,41 @@
+name: Deploy React App to Hosting
+
+on:
+  push:
+    branches:
+      - main  # or master, depending on your repo default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Build the project
+      - name: Build project
+        run: npm run build
+
+      # 5. Deploy to Hosting
+      - name: Deploy via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.palbytes.co.ke }}
+          port: ${{ secrets.22 }}
+          username: ${{ secrets.axzpnxbj }}
+          password: ${{ secrets.:mK4UpQw908Uu; }}
+          local-dir: dist
+          server-dir: ${{ secrets./public_html/wp-content/reactpress/palbytes/ }}
+          protocol: sftp
