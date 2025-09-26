@@ -1,23 +1,26 @@
-name: Build React App for Palbytes
+name: Build palbyte-vision-forge React App
 on:
   push:
-    branches: [ main ]  # Change to your default branch if not 'main'
+    branches: [ main ]  # Change to your default branch if different (e.g., master)
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4  # Updated to v4
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4  # Updated to v4
       with:
-        node-version: '16'  # Stable for React apps
+        node-version: '18'  # Stable for React; adjust if your local uses different
+        cache: 'npm'
     - name: Install dependencies
-      run: npm ci
+      run: npm ci  # Faster and more reliable than npm install
     - name: Build app
       run: npm run build
+      env:
+        NODE_ENV: production
     - name: Upload build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # Updated to v4 (fixes deprecation)
       with:
-        name: palbytes-build  # Named for your app
+        name: palbyte-vision-forge-build
         path: build/
-        retention-days: 7
+        retention-days: 30  # Keep artifacts for a month
