@@ -1,0 +1,23 @@
+name: Build React App for Palbytes
+on:
+  push:
+    branches: [ main ]  # Change to your default branch if not 'main'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Stable for React apps
+    - name: Install dependencies
+      run: npm ci
+    - name: Build app
+      run: npm run build
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: palbytes-build  # Named for your app
+        path: build/
+        retention-days: 7
